@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Сайыс</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:url("https://files.catbox.moe/rdw4q5.png") no-repeat center center fixed;
+  background-size:cover;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:0;
+  pointer-events:none;
+}
+body *{
+  position:relative;
+  z-index:1;
+}
+
+a{  
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display:inline-block;
+  margin:14px 20px;
+  color:#cae1ff;
+  text-decoration:none;
+  font-size:18px;
+}
+a:hover{ text-decoration:underline; }
+
+h1{
+  color:#cae1ff;
+  text-align:center;
+  font-size:50px;
+  margin:20px 0;
+  text-shadow:0 2px 6px rgba(0,0,0,.7);
+}
+
+h2{ color:#c3beff; margin:0 0 10px; }
+p{ color:#e0d9ff; font-size:16px; }
+
+.scroll{
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:30px 0;
+  -webkit-overflow-scrolling:touch;
+}
+.scroll::-webkit-scrollbar{ height:8px; }
+.scroll::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.35);
+  border-radius:10px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  width:max-content;
+  padding:0 40px;
+}
+
+.pic{
+  height:400px;
+  border-radius:10px;
+  transition:300ms ease-in-out;
+  box-shadow:0 5px 10px rgba(0,0,0,.6);
+  flex:0 0 auto;
+}
+.pic + .pic{ margin-left:-30px; }
+.pic:hover{
+  transform:rotate(-6deg) scale(1.1);
+  z-index:2;
+}
+.pic img{
+  width:300px;
+  height:400px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+}
+
+.panel{
+  margin:20px auto 0;
+  max-width:900px;
+  padding:14px 18px;
+  background:rgba(255, 145, 0, 0.85);
+  backdrop-filter:blur(8px);
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  opacity:0;
+  transition:.25s ease;
+}
+.panel h2{
+  font-size:22px;
+  color:#222;
+}
+.panel p{
+  font-size:14px;
+  color:#333;
+}
+
+.txt{
+  max-width:900px;
+  margin:16px auto 0;
+  padding:0 18px;
+}
+.txt .name{ color:#c3beff; }
+
+.btn{
+  display:inline-block;
+  margin-top:14px;
+  padding:12px 28px;
+  font-size:18px;
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff8a00,#ff3d00);
+  box-shadow:0 8px 20px rgba(255,61,0,.45);
+  transition:.25s ease;
+  text-transform:lowercase;
+}
+.btn:hover{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 12px 28px rgba(255,61,0,.65);
+}
+.btn:active{ transform:scale(.97); }
+</style>
+</head>
+
+<body>
+
+<a href="#">Даттебае</a>
+
+<div class="scroll">
+  <div class="row" id="cards">
+    <div class="pic"><img src="https://files.catbox.moe/rlkovt.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/aobpjw.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/27u8f0.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/3j3eco.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/crt24w.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/cvz81j.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/776311.png" alt=""></div>
+    <div class="pic"><img src="https://files.catbox.moe/joc9b9.png" alt=""></div>
+  </div>
+</div>
+
+<div class="panel" id="panel">
+  <h2 id="nm">Персонаж</h2>
+  <p id="ds">Наведи курсор на карточку</p>
+</div>
+
+<div class="txt">
+  <h2 class="name">Нарутоны дәл қазір көру үшін батырманы бас!</h2>
+  <a class="btn" href="http://t.me/animedhse" target="_blank">наруто көру</a>
+</div>
+
+<h1>Наруто әлеміне байланысты сайт</h1>
+
+<script>
+var pics = document.querySelectorAll(".pic");
+var panel = document.getElementById("panel");
+var nm = document.getElementById("nm");
+var ds = document.getElementById("ds");
+
+var info = [
+  { name: "Наруто", desc: "Узумаки әулетінен шыққан" },
+  { name: "Саске", desc: "Учиха әулетінің соңғысы" },
+  { name: "Сакура", desc: "Медициналық ниндзя" },
+  { name: "Мадара", desc: "Учиха кланының негізін қалаушы" },
+  { name: "Какаши", desc: "Копия ниндзя, 7 топтың ұстазы" },
+  { name: "Итачи", desc: "Аңызға айналған Учиха" },
+  { name: "Хината", desc: "Бьякуган иесі" },
+  { name: "Обито", desc: "Саниндердің қорқынышы" }
+];
+
+for (var i = 0; i < pics.length; i++) {
+  (function(i){
+    pics[i].addEventListener("mouseenter", function(){
+      nm.textContent = info[i].name;
+      ds.textContent = info[i].desc;
+      panel.style.opacity = "1";
+    });
+  })(i);
+}
+</script>
+
+</body>
+</html>
